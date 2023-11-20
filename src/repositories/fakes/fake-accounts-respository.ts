@@ -20,4 +20,12 @@ export class FakeAccountsRepository implements AccountsRepository {
 
     return account;
   }
+
+  async findByAccount(account: string) {
+    const accountFound = this.items.find(
+      (accountItem) => accountItem.account === account
+    );
+
+    return accountFound || null;
+  }
 }

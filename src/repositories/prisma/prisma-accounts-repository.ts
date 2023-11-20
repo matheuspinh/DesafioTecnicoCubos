@@ -8,4 +8,12 @@ export class PrismaAccountsRepository implements AccountsRepository {
 
     return account;
   }
+
+  async findByAccount(account: string) {
+    const accountFound = await prisma.account.findUnique({
+      where: { account },
+    });
+
+    return accountFound || null;
+  }
 }
