@@ -38,7 +38,7 @@ model Account {
   id        String   @id @default(uuid())
   branch    String
   account   String   @unique
-  balance   BigInt
+  balance   BigInt   @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -17,6 +17,7 @@ export async function authenticateUser(
   const formattedDocument = document.replace(/\D/g, "");
 
   const authenticateUserService = MakeAuthenticateUserService();
+
   try {
     const { user } = await authenticateUserService.execute({
       document: formattedDocument,
@@ -25,7 +26,7 @@ export async function authenticateUser(
 
     const token = await reply.jwtSign({ id: user.id });
 
-    return reply.status(200).send({ token: `Bearer ${token}` });
+    return reply.status(200).send({ token });
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(401).send({ message: error.message });
