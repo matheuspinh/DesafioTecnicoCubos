@@ -28,4 +28,16 @@ export class FakeAccountsRepository implements AccountsRepository {
 
     return accountFound || null;
   }
+
+  async fetchByUserId(data: { userId: string; page: number; perPage: number }) {
+    let skip = (data.page - 1) * data.perPage;
+
+    const accountsList = this.items.filter(
+      (accountItem) => accountItem.userId === data.userId
+    );
+    const totalAccounts = accountsList.length;
+    const accounts = accountsList.slice(skip, skip + data.perPage);
+
+    return { accounts, totalAccounts };
+  }
 }
