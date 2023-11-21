@@ -51,4 +51,14 @@ export class FakeCardsRepository implements CardsRepository {
 
     return { cards, totalCards };
   }
+
+  async fetchByUserId(data: { userId: string; page: number; perPage: number }) {
+    let skip = (data.page - 1) * data.perPage;
+
+    const cardsList = this.items.filter((card) => card.userId === data.userId);
+    const totalCards = cardsList.length;
+    const cards = cardsList.slice(skip, skip + data.perPage);
+
+    return { cards, totalCards };
+  }
 }

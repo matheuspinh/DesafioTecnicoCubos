@@ -11,11 +11,17 @@ import { verifyRequestQuery } from "@/http/middlewares/verify-request-query";
 import { registerCard } from "./register-card";
 import { paginationQuerySchema } from "@/schemas/pagination";
 import { fetchCardsByAccountId } from "./fetch-cards-by-account-id";
+import { fetchCardsByUserId } from "./fetch-cards-by-user-id";
 
 const accountsRoutes = express();
 
 accountsRoutes.use(verifyJwt);
 
+accountsRoutes.get(
+  "/accounts/cards",
+  verifyRequestQuery(paginationQuerySchema),
+  fetchCardsByUserId
+);
 accountsRoutes.post(
   "/accounts",
   verifyRequestBody(registerAccountBodySchema),
