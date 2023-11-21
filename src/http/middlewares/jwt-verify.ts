@@ -26,6 +26,6 @@ export async function verifyJwt(
 
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Não autorizado" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 }

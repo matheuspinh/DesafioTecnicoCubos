@@ -5,14 +5,13 @@ import jwt from "jsonwebtoken";
 import { env } from "@/env";
 
 export async function authenticateUser(request: Request, res: Response) {
-  console.log(request.body);
+  const { document, password } = request.body;
+
+  const formattedDocument = document.replace(/\D/g, "");
+
+  const authenticateUserService = MakeAuthenticateUserService();
+
   try {
-    const { document, password } = request.body;
-
-    const formattedDocument = document.replace(/\D/g, "");
-
-    const authenticateUserService = MakeAuthenticateUserService();
-
     const { user } = await authenticateUserService.execute({
       document: formattedDocument,
       password,
@@ -28,6 +27,6 @@ export async function authenticateUser(request: Request, res: Response) {
       return res.status(401).send({ message: error.message });
     }
 
-    throw error;
+    return res.status(500).send({ message: "Internal server error" });
   }
 }

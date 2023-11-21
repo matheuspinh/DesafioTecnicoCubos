@@ -1,7 +1,7 @@
 import express from "express";
 import { registerUser } from "./register-user";
 import { authenticateUser } from "./authenticate-user";
-import { verifyRequest } from "@/http/middlewares/verify-request";
+import { verifyRequestBody } from "@/http/middlewares/verify-request-body";
 import {
   authenticateUserBodySchema,
   registerUserBodySchema,
@@ -11,12 +11,12 @@ const usersRoutes = express.Router();
 
 usersRoutes.post(
   "/people",
-  verifyRequest(registerUserBodySchema),
+  verifyRequestBody(registerUserBodySchema),
   registerUser
 );
 usersRoutes.post(
   "/login",
-  verifyRequest(authenticateUserBodySchema),
+  verifyRequestBody(authenticateUserBodySchema),
   authenticateUser
 );
 

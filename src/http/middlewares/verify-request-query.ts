@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError, ZodSchema } from "zod";
 
-export const verifyRequest =
+export const verifyRequestQuery =
   (zodSchema: ZodSchema) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
-      zodSchema.parse(req.body);
+      zodSchema.parse(req.query);
       next();
     } catch (error) {
       if (error instanceof ZodError) {
