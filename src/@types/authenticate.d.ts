@@ -1,9 +1,6 @@
-import "@fastify/jwt";
-
-declare module "@fastify/jwt" {
-  export interface FastifyJWT {
-    user: {
-      id: string;
-    };
+import "express";
+declare module "express" {
+  export interface Request {
+    userId?: string;
   }
 }

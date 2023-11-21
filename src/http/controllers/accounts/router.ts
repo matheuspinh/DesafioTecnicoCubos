@@ -1,7 +1,17 @@
-import { FastifyInstance } from "fastify";
 import { registerAccount } from "./register-account";
 import { verifyJwt } from "@/http/middlewares/jwt-verify";
+import { verifyRequest } from "@/http/middlewares/verify-request";
+import { registerAccountBodySchema } from "@/schemas/accounts";
+import express from "express";
 
-export async function accountsRoutes(app: FastifyInstance) {
-  app.post("/accounts", { onRequest: [verifyJwt] }, registerAccount);
-}
+const accountsRoutes = express();
+
+accountsRoutes.use(verifyJwt);
+
+accountsRoutes.post(
+  "/accounts",
+  verifyRequest(registerAccountBodySchema),
+  registerAccount
+);
+
+export default accountsRoutes;
