@@ -2,7 +2,6 @@ import { registerAccount } from "./register-account";
 import { verifyJwt } from "@/http/middlewares/jwt-verify";
 import { verifyRequestBody } from "@/http/middlewares/verify-request-body";
 import {
-  fetchAccountsByUserIdQuerySchema,
   registerAccountBodySchema,
   registerCardBodySchema,
 } from "@/schemas/accounts";
@@ -10,6 +9,8 @@ import express from "express";
 import { fetchAccountsByUserId } from "./fetch-accounts-by-user-id";
 import { verifyRequestQuery } from "@/http/middlewares/verify-request-query";
 import { registerCard } from "./register-card";
+import { paginationQuerySchema } from "@/schemas/pagination";
+import { fetchCardsByAccountId } from "./fetch-cards-by-account-id";
 
 const accountsRoutes = express();
 
@@ -26,8 +27,13 @@ accountsRoutes.post(
   registerCard
 );
 accountsRoutes.get(
+  "/accounts/:accountId/cards",
+  verifyRequestQuery(paginationQuerySchema),
+  fetchCardsByAccountId
+);
+accountsRoutes.get(
   "/accounts",
-  verifyRequestQuery(fetchAccountsByUserIdQuerySchema),
+  verifyRequestQuery(paginationQuerySchema),
   fetchAccountsByUserId
 );
 

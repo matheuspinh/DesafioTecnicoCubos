@@ -35,4 +35,20 @@ export class FakeCardsRepository implements CardsRepository {
 
     return cardFound || null;
   }
+
+  async fetchByAccount(data: {
+    accountId: string;
+    page: number;
+    perPage: number;
+  }) {
+    let skip = (data.page - 1) * data.perPage;
+
+    const cardsList = this.items.filter(
+      (card) => card.accountId === data.accountId
+    );
+    const totalCards = cardsList.length;
+    const cards = cardsList.slice(skip, skip + data.perPage);
+
+    return { cards, totalCards };
+  }
 }

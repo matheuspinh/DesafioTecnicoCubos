@@ -28,7 +28,7 @@ export async function fetchAccountsByUserId(req: Request, res: Response) {
     );
 
     const responseData = {
-      transformedAccounts,
+      accounts: transformedAccounts,
       pagination: {
         totalCount: totalAccounts,
         itemsPerPage: perPage,
