@@ -9,7 +9,7 @@ let server: http.Server;
 describe("POST /login", () => {
   beforeAll(async () => {
     server = http.createServer(app);
-    server.listen(4444);
+    server.listen();
   });
 
   afterAll(async () => {
