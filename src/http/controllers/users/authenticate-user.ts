@@ -26,7 +26,6 @@ export async function authenticateUser(request: Request, res: Response) {
     if (error instanceof InvalidCredentialsError) {
       return res.status(401).send({ message: error.message });
     }
-
-    return res.status(500).send({ message: "Internal server error" });
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 }

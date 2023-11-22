@@ -33,6 +33,6 @@ export async function registerUser(req: Request, res: Response) {
     if (error instanceof InvalidDocumentError) {
       return res.status(400).send({ message: error.message });
     }
-    throw error;
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 }

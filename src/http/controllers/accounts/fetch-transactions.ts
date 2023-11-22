@@ -39,8 +39,6 @@ export async function fetchFilteredTransactions(req: Request, res: Response) {
 
     return res.status(200).send(responseData);
   } catch (error) {
-    if (error instanceof Error) {
-      return res.status(400).send({ message: error.message });
-    }
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 }

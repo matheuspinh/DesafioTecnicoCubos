@@ -28,6 +28,6 @@ export async function registerAccount(req: Request, res: Response) {
     if (error instanceof AccountAlreadyRegisteredError) {
       return res.status(409).send({ message: error.message });
     }
-    throw error;
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 }
