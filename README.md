@@ -76,9 +76,9 @@ Para executar os testes utilizando a interface vitest execute
 npm run test:ui
 ```
 
-- Para executar os testes e2e
+Para executar os testes e2e:
 
-  primeiro execute
+primeiro execute
 
 ```sh
 npm run pretest:e2e
