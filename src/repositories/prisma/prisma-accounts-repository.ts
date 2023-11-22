@@ -49,8 +49,6 @@ export class PrismaAccountsRepository implements AccountsRepository {
       where: { id: accountId },
     });
 
-    console.log(account?.balance ?? null);
-
     return account?.balance ?? null;
   }
 

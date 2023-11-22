@@ -15,52 +15,61 @@ import {
 } from "@/schemas/pagination";
 import { fetchCardsByAccountId } from "./fetch-cards-by-account-id";
 import { fetchCardsByUserId } from "./fetch-cards-by-user-id";
-import { verify } from "crypto";
-import { registerTransactionBodySchema } from "@/schemas/transactions";
+import {
+  registerTransactionBodySchema,
+  revertTransactionBodySchema,
+} from "@/schemas/transactions";
 import { registerTransaction } from "./register-transaction";
 import { fetchFilteredTransactions } from "./fetch-transactions";
-import { get } from "http";
 import { getAccountBalance } from "./get-account-balance";
+import { revertTransaction } from "./revert-transaction";
 
 const accountsRoutes = express();
 
-accountsRoutes.use(verifyJwt);
-
 accountsRoutes.get(
   "/accounts/cards",
-  verifyRequestQuery(paginationQuerySchema),
+  [verifyRequestQuery(paginationQuerySchema), verifyJwt],
   fetchCardsByUserId
 );
 accountsRoutes.post(
   "/accounts",
-  verifyRequestBody(registerAccountBodySchema),
+  [verifyRequestBody(registerAccountBodySchema), verifyJwt],
   registerAccount
 );
 accountsRoutes.post(
   "/accounts/:accountId/transactions",
-  verifyRequestBody(registerTransactionBodySchema),
+  [verifyRequestBody(registerTransactionBodySchema), verifyJwt],
   registerTransaction
 );
 accountsRoutes.post(
   "/accounts/:accountId/cards",
-  verifyRequestBody(registerCardBodySchema),
+  [verifyRequestBody(registerCardBodySchema), verifyJwt],
   registerCard
 );
 accountsRoutes.get(
   "/accounts/:accountId/cards",
-  verifyRequestQuery(paginationQuerySchema),
+  [verifyRequestQuery(paginationQuerySchema), verifyJwt],
   fetchCardsByAccountId
 );
 accountsRoutes.get(
   "/accounts",
-  verifyRequestQuery(paginationQuerySchema),
+  [verifyRequestQuery(paginationQuerySchema), verifyJwt],
   fetchAccountsByUserId
 );
 accountsRoutes.get(
   "/accounts/:accountId/transactions",
-  verifyRequestQuery(paginationWithSearchQuerySchema),
+  [verifyRequestQuery(paginationWithSearchQuerySchema), verifyJwt],
   fetchFilteredTransactions
 );
-accountsRoutes.get("/accounts/:accountId/balance", getAccountBalance);
+accountsRoutes.get(
+  "/accounts/:accountId/balance",
+  verifyJwt,
+  getAccountBalance
+);
+accountsRoutes.post(
+  "/accounts/:accountId/transactions/:transactionId/revert",
+  [verifyJwt, verifyRequestBody(revertTransactionBodySchema)],
+  revertTransaction
+);
 
 export default accountsRoutes;

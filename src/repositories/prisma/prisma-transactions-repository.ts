@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
   FetchFilteredTransactionsData,
   TransactionsRepository,
+  UpdateTransactionData,
 } from "../transactions-repository";
 
 export class PrismaTransactionsRepository implements TransactionsRepository {
@@ -41,5 +42,26 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     const totalTransactions = transactionsInfos[1];
 
     return { transactions, totalTransactions };
+  }
+
+  async updateTransaction(data: UpdateTransactionData) {
+    const transaction = await prisma.transaction.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
+
+    return transaction;
+  }
+
+  async findTransactionById(id: string) {
+    const transaction = await prisma.transaction.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return transaction;
   }
 }

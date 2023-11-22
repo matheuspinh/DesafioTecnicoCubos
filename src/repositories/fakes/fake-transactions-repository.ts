@@ -44,4 +44,31 @@ export class FakeTransactionsRepository implements TransactionsRepository {
       totalTransactions,
     };
   }
+
+  async updateTransaction(data: {
+    id: string;
+    description?: string;
+    type?: "credit" | "debit";
+    value?: number;
+    accountId?: string;
+  }) {
+    const transactionIndex = this.items.findIndex(
+      (transaction) => transaction.id === data.id
+    );
+
+    const transaction = {
+      ...this.items[transactionIndex],
+      ...data,
+    };
+
+    this.items[transactionIndex] = transaction;
+
+    return transaction;
+  }
+
+  async findTransactionById(id: string) {
+    const transaction = this.items.find((transaction) => transaction.id === id);
+
+    return transaction ?? null;
+  }
 }

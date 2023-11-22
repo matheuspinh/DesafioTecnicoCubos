@@ -10,8 +10,6 @@ export async function registerTransaction(req: Request, res: Response) {
 
   const formattedValue = transformToCents(value);
 
-  console.log(accountId);
-
   const registerTransactionService = MakeRegisterTransactionService();
 
   try {
