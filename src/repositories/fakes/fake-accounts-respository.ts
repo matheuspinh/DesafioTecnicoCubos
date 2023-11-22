@@ -42,9 +42,9 @@ export class FakeAccountsRepository implements AccountsRepository {
   }
 
   async getAccountBalance(accountId: string) {
-    const account = this.items.find(
-      (accountItem) => accountItem.id === accountId
-    );
+    const account = this.items.find((accountItem) => {
+      return accountItem.id === accountId;
+    });
 
     return account?.balance || null;
   }
@@ -61,5 +61,11 @@ export class FakeAccountsRepository implements AccountsRepository {
     account.balance += data.value;
 
     return account.balance;
+  }
+
+  async findById(id: string) {
+    const account = this.items.find((accountItem) => accountItem.id === id);
+
+    return account || null;
   }
 }

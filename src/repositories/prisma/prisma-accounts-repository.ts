@@ -49,6 +49,8 @@ export class PrismaAccountsRepository implements AccountsRepository {
       where: { id: accountId },
     });
 
+    console.log(account?.balance ?? null);
+
     return account?.balance ?? null;
   }
 
@@ -63,5 +65,11 @@ export class PrismaAccountsRepository implements AccountsRepository {
     });
 
     return account.balance || null;
+  }
+
+  async findById(id: string) {
+    const account = await prisma.account.findUnique({ where: { id } });
+
+    return account || null;
   }
 }

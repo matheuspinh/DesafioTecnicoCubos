@@ -18,4 +18,5 @@ export interface AccountsRepository {
   ): Promise<{ accounts: Account[]; totalAccounts: number }>;
   getAccountBalance(accountId: string): Promise<number | null>;
   updateAccountBalance(data: UpdateAccountBalanceData): Promise<number | null>;
+  findById(id: string): Promise<Account | null>;
 }

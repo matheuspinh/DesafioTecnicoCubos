@@ -19,6 +19,8 @@ import { verify } from "crypto";
 import { registerTransactionBodySchema } from "@/schemas/transactions";
 import { registerTransaction } from "./register-transaction";
 import { fetchFilteredTransactions } from "./fetch-transactions";
+import { get } from "http";
+import { getAccountBalance } from "./get-account-balance";
 
 const accountsRoutes = express();
 
@@ -59,5 +61,6 @@ accountsRoutes.get(
   verifyRequestQuery(paginationWithSearchQuerySchema),
   fetchFilteredTransactions
 );
+accountsRoutes.get("/accounts/:accountId/balance", getAccountBalance);
 
 export default accountsRoutes;

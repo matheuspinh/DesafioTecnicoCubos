@@ -1,15 +1,16 @@
 import { AccountsRepository } from "@/repositories/accounts-repository";
 import { CouldNotFoundAccountError } from "../errors/could-not-find-account-error";
 
-export class GetAccountBalanceService {
+export class GetAccountById {
   constructor(private accountsRepository: AccountsRepository) {}
 
   async execute(accountId: string) {
-    const balance = await this.accountsRepository.getAccountBalance(accountId);
+    const account = await this.accountsRepository.findById(accountId);
 
-    if (balance === null) {
+    if (account === null) {
       throw new CouldNotFoundAccountError();
     }
-    return balance;
+
+    return account;
   }
 }
