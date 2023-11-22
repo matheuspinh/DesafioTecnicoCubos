@@ -11,9 +11,13 @@ npm install
 - Crie um arquivo `.env` e o popule com as variáveis do arquivo `.env.example`
 
   NODE_ENV="dev"
+
   PORT=3333
+
   DATABASE_URL="postgresql://docker:docker@localhost:5435/desafiocubos"
+
   JWT_SECRET=
+
   JWT_EXPIRES_IN="10 m"
 
   A variável PORT pode ser mudada para uma porta de preferência.
