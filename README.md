@@ -75,3 +75,19 @@ Para executar os testes utilizando a interface vitest execute
 ```sh
 npm run test:ui
 ```
+
+- Para executar os testes e2e
+
+  primeiro execute
+
+```sh
+npm run pretest:e2e
+```
+
+depois execute
+
+```sh
+npm run test:e2e
+```
+
+_Podem ocorrer erros de permissão nos scripts de testes e2e acima, para evitá-lo utilize-os com o comando sudo antes dos scripts ou execute em um terminal com permissão de administrador_
