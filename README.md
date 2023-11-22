@@ -17,8 +17,11 @@ npm install
   JWT_EXPIRES_IN="10 m"
 
   A variável PORT pode ser mudada para uma porta de preferência.
+
   A variável JWT_SECRET deve ser uma string que será usada como chave secreta para a encriptação dos tokens jwt.
+
   A variável JWT_EXPIRES_IN representa o tempo de expiração do token, por padrão está configurada para 10 minutos.
+
   A variável DATABASE_URL está previamente configurada para corresponder às configurações encontradas em docker-compose.yml se preferir modificar as variáveis do docker lembre-se de atualizar a DATABASE_URL.
 
 ## Docker
