@@ -21,5 +21,6 @@ export async function createAndAuthenticateUser(app: Express) {
 
   return {
     token,
+    user,
   };
 }
