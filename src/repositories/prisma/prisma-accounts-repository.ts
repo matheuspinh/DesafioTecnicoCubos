@@ -1,5 +1,9 @@
 import { Prisma } from "@prisma/client";
-import { AccountsRepository, FetchByUserIdData } from "../accounts-repository";
+import {
+  AccountsRepository,
+  FetchByUserIdData,
+  UpdateAccountBalanceData,
+} from "../accounts-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaAccountsRepository implements AccountsRepository {
@@ -38,5 +42,26 @@ export class PrismaAccountsRepository implements AccountsRepository {
     const totalAccounts = accountsInfos[1];
 
     return { accounts, totalAccounts };
+  }
+
+  async getAccountBalance(accountId: string) {
+    const account = await prisma.account.findUnique({
+      where: { id: accountId },
+    });
+
+    return account?.balance ?? null;
+  }
+
+  async updateAccountBalance(data: UpdateAccountBalanceData) {
+    const account = await prisma.account.update({
+      where: { id: data.accountId },
+      data: {
+        balance: {
+          increment: data.value,
+        },
+      },
+    });
+
+    return account.balance || null;
   }
 }

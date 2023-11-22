@@ -5,6 +5,7 @@ interface RegisterAccountServiceRequest {
   branch: string;
   account: string;
   userId: string;
+  balance?: number;
 }
 export class RegisterAccountService {
   constructor(private accountsRepository: AccountsRepository) {}
@@ -22,6 +23,7 @@ export class RegisterAccountService {
       branch: data.branch,
       account: data.account,
       userId: data.userId,
+      balance: data.balance ?? 0,
     });
 
     return account;

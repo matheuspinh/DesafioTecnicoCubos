@@ -9,9 +9,16 @@ import express from "express";
 import { fetchAccountsByUserId } from "./fetch-accounts-by-user-id";
 import { verifyRequestQuery } from "@/http/middlewares/verify-request-query";
 import { registerCard } from "./register-card";
-import { paginationQuerySchema } from "@/schemas/pagination";
+import {
+  paginationQuerySchema,
+  paginationWithSearchQuerySchema,
+} from "@/schemas/pagination";
 import { fetchCardsByAccountId } from "./fetch-cards-by-account-id";
 import { fetchCardsByUserId } from "./fetch-cards-by-user-id";
+import { verify } from "crypto";
+import { registerTransactionBodySchema } from "@/schemas/transactions";
+import { registerTransaction } from "./register-transaction";
+import { fetchFilteredTransactions } from "./fetch-transactions";
 
 const accountsRoutes = express();
 
@@ -28,6 +35,11 @@ accountsRoutes.post(
   registerAccount
 );
 accountsRoutes.post(
+  "/accounts/:accountId/transactions",
+  verifyRequestBody(registerTransactionBodySchema),
+  registerTransaction
+);
+accountsRoutes.post(
   "/accounts/:accountId/cards",
   verifyRequestBody(registerCardBodySchema),
   registerCard
@@ -41,6 +53,11 @@ accountsRoutes.get(
   "/accounts",
   verifyRequestQuery(paginationQuerySchema),
   fetchAccountsByUserId
+);
+accountsRoutes.get(
+  "/accounts/:accountId/transactions",
+  verifyRequestQuery(paginationWithSearchQuerySchema),
+  fetchFilteredTransactions
 );
 
 export default accountsRoutes;

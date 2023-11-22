@@ -10,7 +10,7 @@ export class FakeAccountsRepository implements AccountsRepository {
       id: randomUUID(),
       branch: data.branch,
       account: data.account,
-      balance: BigInt(0),
+      balance: data.balance ?? 0,
       createdAt: new Date(),
       updatedAt: new Date(),
       userId: data.userId,
@@ -39,5 +39,27 @@ export class FakeAccountsRepository implements AccountsRepository {
     const accounts = accountsList.slice(skip, skip + data.perPage);
 
     return { accounts, totalAccounts };
+  }
+
+  async getAccountBalance(accountId: string) {
+    const account = this.items.find(
+      (accountItem) => accountItem.id === accountId
+    );
+
+    return account?.balance || null;
+  }
+
+  async updateAccountBalance(data: { accountId: string; value: number }) {
+    const account = this.items.find(
+      (accountItem) => accountItem.id === data.accountId
+    );
+
+    if (!account) {
+      return null;
+    }
+
+    account.balance += data.value;
+
+    return account.balance;
   }
 }

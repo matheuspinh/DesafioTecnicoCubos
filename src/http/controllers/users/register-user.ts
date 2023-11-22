@@ -1,6 +1,6 @@
 import { DocumentAlreadyRegisteredError } from "@/services/errors/document-already-registered-error";
 import { InvalidDocumentError } from "@/services/errors/invalid-document-error";
-import { makeRegisterNewUserService } from "@/services/factories/make-register-new-user-service";
+import { MakeRegisterNewUserService } from "@/services/factories/make-register-new-user-service";
 import { formatDocument } from "@/utils/format-document";
 import { Request, Response } from "express";
 
@@ -10,7 +10,7 @@ export async function registerUser(req: Request, res: Response) {
 
     const formattedDocument = formatDocument(document);
 
-    const registerNewUserService = makeRegisterNewUserService();
+    const registerNewUserService = MakeRegisterNewUserService();
     const user = await registerNewUserService.execute({
       name,
       document: formattedDocument,

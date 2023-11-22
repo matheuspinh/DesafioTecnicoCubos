@@ -38,7 +38,7 @@ model Account {
   id        String   @id @default(uuid())
   branch    String
   account   String   @unique
-  balance   BigInt   @default(0)
+  balance   Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -71,7 +71,7 @@ model Transaction {
   id          String          @id @default(uuid())
   description String
   type        TransactionType
-  value       BigInt
+  value       Int
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 

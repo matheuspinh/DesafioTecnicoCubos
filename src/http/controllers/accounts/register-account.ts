@@ -1,5 +1,5 @@
 import { AccountAlreadyRegisteredError } from "@/services/errors/account-already-registered-error";
-import { makeRegisterAccountService } from "@/services/factories/make-register-account-service";
+import { MakeRegisterAccountService } from "@/services/factories/make-register-account-service";
 import { formatAccountNumber } from "@/utils/format-account-number";
 import { Request, Response } from "express";
 
@@ -8,7 +8,7 @@ export async function registerAccount(req: Request, res: Response) {
   const userId = req.userId!;
 
   try {
-    const registerAccountService = makeRegisterAccountService();
+    const registerAccountService = MakeRegisterAccountService();
     const newAccount = await registerAccountService.execute({
       branch,
       account,

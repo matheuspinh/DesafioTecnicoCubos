@@ -1,6 +1,6 @@
 import { AccountAlreadyHasPhysicalCardError } from "@/services/errors/account-already-has-physical-card-error";
 import { CardAlreadyExistsError } from "@/services/errors/card-already-exists-error";
-import { makeRegisterCardService } from "@/services/factories/make-register-card-service";
+import { MakeRegisterCardService } from "@/services/factories/make-register-card-service";
 import { formatCardNumber } from "@/utils/format-card-number";
 import { Request, Response } from "express";
 
@@ -11,7 +11,7 @@ export async function registerCard(req: Request, res: Response) {
   const userId = req.userId!;
 
   const formattedCardNumber = number.replace(/\D/g, "");
-  const registerCardService = makeRegisterCardService();
+  const registerCardService = MakeRegisterCardService();
 
   try {
     const newCard = await registerCardService.execute({
