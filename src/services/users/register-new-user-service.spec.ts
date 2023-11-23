@@ -16,7 +16,7 @@ describe("Register new user service", () => {
   it("should be able to register a new user", async () => {
     const user = await sut.execute({
       name: "User Name",
-      document: "12345678900",
+      document: "94675485006",
       password: "123456",
     });
     expect(user).toHaveProperty("id");
@@ -26,7 +26,7 @@ describe("Register new user service", () => {
   it("should save the hashed password", async () => {
     const user = await sut.execute({
       name: "User Name",
-      document: "12345678900",
+      document: "94675485006",
       password: "123456",
     });
 
@@ -38,13 +38,13 @@ describe("Register new user service", () => {
   it("should not be able to register with the same document twice", async () => {
     await sut.execute({
       name: "User Name",
-      document: "12345678900",
+      document: "94675485006",
       password: "123456",
     });
     await expect(() =>
       sut.execute({
         name: "User Name",
-        document: "12345678900",
+        document: "94675485006",
         password: "123456",
       })
     ).rejects.toBeInstanceOf(DocumentAlreadyRegisteredError);

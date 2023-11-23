@@ -30,7 +30,7 @@ describe("POST /accounts/:accountId/cards", () => {
       .set("Authorization", token)
       .send({
         type: "physical",
-        number: "0000000000000001",
+        number: "0123765443210190",
         cvv: "000",
       });
 

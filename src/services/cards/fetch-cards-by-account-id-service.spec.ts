@@ -15,21 +15,21 @@ describe("fetch cards by account id service", () => {
       accountId: "account-id",
       type: "physical",
       cvv: "123",
-      number: "1234567891234567",
+      number: "4242424242424242",
       userId: "user-id",
     });
     await cardsRepository.create({
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234569",
+      number: "0123765443210190",
       userId: "user-id",
     });
     await cardsRepository.create({
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234568",
+      number: "4902392576115668",
       userId: "user-id",
     });
   });

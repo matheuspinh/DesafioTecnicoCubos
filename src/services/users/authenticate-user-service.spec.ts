@@ -17,14 +17,14 @@ describe("Authentication Service", () => {
 
     await registerNewUserService.execute({
       name: "fake name",
-      document: "12345678900",
+      document: "94675485006",
       password: "12345678",
     });
   });
 
   it("should be able to authenticate a user", async () => {
     const { user } = await sut.execute({
-      document: "12345678900",
+      document: "94675485006",
       password: "12345678",
     });
 
@@ -43,7 +43,7 @@ describe("Authentication Service", () => {
   it("should not be able to authenticate a user with an invalid password", async () => {
     await expect(() =>
       sut.execute({
-        document: "12345678900",
+        document: "94675485006",
         password: "123456789",
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError);

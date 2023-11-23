@@ -1,5 +1,6 @@
 import { AccountAlreadyHasPhysicalCardError } from "@/services/errors/account-already-has-physical-card-error";
 import { CardAlreadyExistsError } from "@/services/errors/card-already-exists-error";
+import { InvalidCardNumber } from "@/services/errors/invalid-card-number-error";
 import { MakeRegisterCardService } from "@/services/factories/make-register-card-service";
 import { formatCardNumber } from "@/utils/format-card-number";
 import { Request, Response } from "express";
@@ -33,6 +34,9 @@ export async function registerCard(req: Request, res: Response) {
 
     return res.status(201).send(responseData);
   } catch (error) {
+    if (error instanceof InvalidCardNumber) {
+      return res.status(400).send({ message: error.message });
+    }
     if (error instanceof AccountAlreadyHasPhysicalCardError) {
       return res.status(409).send({ message: error.message });
     }

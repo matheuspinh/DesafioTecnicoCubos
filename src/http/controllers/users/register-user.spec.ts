@@ -18,7 +18,7 @@ describe("POST /people", () => {
   it("should be able to register a new user", async () => {
     const { body, statusCode } = await request(server).post("/people").send({
       name: "Fake User",
-      document: "12345678910",
+      document: "94675485006",
       password: "12345678",
     });
 

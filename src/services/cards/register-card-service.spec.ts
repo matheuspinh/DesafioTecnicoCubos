@@ -18,7 +18,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "physical",
       cvv: "123",
-      number: "1234567891234567",
+      number: "4242424242424242",
       userId: "user-id",
     });
     expect(card).toHaveProperty("id");
@@ -29,7 +29,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "physical",
       cvv: "123",
-      number: "1234567891234569",
+      number: "0123765443210190",
       userId: "user-id",
     });
 
@@ -38,7 +38,7 @@ describe("Register card service", () => {
         accountId: "account-id",
         type: "physical",
         cvv: "123",
-        number: "1234567891234567",
+        number: "4242424242424242",
         userId: "user-id",
       })
     ).rejects.toBeInstanceOf(AccountAlreadyHasPhysicalCardError);
@@ -49,7 +49,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "physical",
       cvv: "123",
-      number: "1234567891234567",
+      number: "0123765443210190",
       userId: "user-id",
     });
 
@@ -57,7 +57,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234563",
+      number: "4242424242424242",
       userId: "user-id",
     });
 
@@ -69,7 +69,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234562",
+      number: "0123765443210190",
       userId: "user-id",
     });
 
@@ -77,7 +77,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234567",
+      number: "4242424242424242",
       userId: "user-id",
     });
 
@@ -89,7 +89,7 @@ describe("Register card service", () => {
       accountId: "account-id",
       type: "virtual",
       cvv: "123",
-      number: "1234567891234562",
+      number: "0123765443210190",
       userId: "user-id",
     });
 
@@ -98,7 +98,7 @@ describe("Register card service", () => {
         accountId: "account-id",
         type: "virtual",
         cvv: "123",
-        number: "1234567891234562",
+        number: "0123765443210190",
         userId: "user-id",
       })
     ).rejects.toBeInstanceOf(CardAlreadyExistsError);

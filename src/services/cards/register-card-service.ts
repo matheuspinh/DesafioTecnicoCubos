@@ -1,6 +1,8 @@
 import { CardsRepository } from "@/repositories/cards-repository";
 import { AccountAlreadyHasPhysicalCardError } from "../errors/account-already-has-physical-card-error";
 import { CardAlreadyExistsError } from "../errors/card-already-exists-error";
+import { validateCardNumber } from "@/utils/validate-card-number";
+import { InvalidCardNumber } from "../errors/invalid-card-number-error";
 
 interface RegisterCardServiceRequest {
   accountId: string;
@@ -14,6 +16,12 @@ export class RegisterCardService {
   constructor(private cardsRepository: CardsRepository) {}
 
   async execute(data: RegisterCardServiceRequest) {
+    const numberIsValid = validateCardNumber(data.number);
+
+    if (!numberIsValid) {
+      throw new InvalidCardNumber();
+    }
+
     const cardAlreadyRegistered = await this.cardsRepository.findByNumber(
       data.number
     );
