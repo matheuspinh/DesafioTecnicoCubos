@@ -1,3 +1,5 @@
+import { isValidCNPJ, isValidCPF } from "@brazilian-utils/brazilian-utils";
+
 export function validateDocument(document: string) {
   document = document.replace(/\D/g, "");
 
@@ -5,7 +7,11 @@ export function validateDocument(document: string) {
     return false;
   }
 
-  //Inserir outras etapas de validação de documento
+  if (document.length === 11) {
+    return isValidCPF(document);
+  }
 
-  return true;
+  if (document.length === 14) {
+    return isValidCNPJ(document);
+  }
 }
